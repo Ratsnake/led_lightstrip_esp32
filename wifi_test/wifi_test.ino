@@ -56,14 +56,15 @@ void loop() {
             client.println("Connection: close");
             client.println();
 
-            if(header.indexOf("GET on") >= 0){
+            if(header.indexOf("GET /on") >= 0){
               bool_strip = true;
               Serial.println("ON");
               for(int i = 0; i < SIZE; i++){
                 strip.setPixelColor(i, strip.Color(50, 50, 50));
               }
               strip.show();
-            }else if(header.indexOf("GET off")){
+            }
+            else if(header.indexOf("GET /off") >= 0){
               bool_strip = false;
               Serial.println("OFF");
               for(int i = 0; i < SIZE; i++){
