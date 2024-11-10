@@ -4,14 +4,16 @@
 
 Adafruit_NeoPixel strip(NUM, 13, NEO_GRB + NEO_KHZ800);
 
+
+
 void setup() {
   // put your setup code here, to run once:
   strip.begin();
 
-  int i = 0;
+  int i;
 
   for(i = 0; i < NUM; i++){
-    strip.setPixelColor(i, strip.Color(50, 50, 50));
+    strip.setPixelColor(i, strip.Color(brightness, brightness, brightness));
   }
 
   strip.show();
