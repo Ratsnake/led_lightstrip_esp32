@@ -22,7 +22,7 @@ void loop() {
     strip.setPixelColor(i, strip.Color(50, 50, 50));
 
     strip.show();
-    delay(20+i);
+    delay(80-i);
   }
 
   delay(1000);
