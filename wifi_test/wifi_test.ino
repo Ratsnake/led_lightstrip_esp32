@@ -13,6 +13,7 @@ WiFiServer server(80);
 String header;
 
 bool bool_strip = false;
+bool worning =false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -74,13 +75,24 @@ void loop() {
             }
             else if(header.indexOf("GET /brightness=") >= 0){
               unsigned short brightness = header.substring(16).toInt();
-              Serial.print("Brightness set : ");
-              Serial.println(brightness);
               
-              for(int i = 0; i < SIZE; i++){
-                strip.setPixelColor(i, strip.Color(brightness, brightness, brightness));
+              if(0 <= brightness && brightness <= 100){
+
+                worning = false;
+                Serial.print("Brightness set : ");
+                Serial.println(brightness);
+
+                for(int i = 0; i < SIZE; i++){
+                  strip.setPixelColor(i, strip.Color(brightness, brightness, brightness));
+                }
+                strip.show();
               }
-              strip.show();
+              else{
+                Serial.println("Value is too large.");
+                worning = true;
+              }
+
+              
             }
 
             client.println("<!DOCTYPE html><html>");
@@ -113,6 +125,9 @@ void loop() {
             }
             else{
               client.println("<p>strip is ON</p>");
+              if(worning == true){
+                client.println("<p>value error!</p>");
+              }
               client.println("<p><a href = \"off\"><button class = \"button button2\">change off?</button></a></p>");
               client.println("<div class=\"container\"><div class=\"slider-group\"><div class=\"value-display\">currentvalue:<span id=\"currentValue\">50</span></div><input type=\"range\" id=\"slider\" min=\"0\" max=\"100\" value=\"50\" oninput=\"updateValue()\"><div><a href=\"brightness=50\" id = \"sendLink\" class = \"send-link\">send data</a></div></div>");
             }
