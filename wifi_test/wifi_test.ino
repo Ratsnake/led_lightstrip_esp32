@@ -94,6 +94,42 @@ void loop() {
 
               
             }
+            else if(header.indexOf("GET /blue") >= 0){
+              for(int i = 0; i < SIZE; i++){
+                strip.setPixelColor(i, strip.Color(0, 0, 50));
+              }
+              strip.show();
+            }
+            else if(header.indexOf("GET /red") >= 0){
+              for(int i = 0; i < SIZE; i++){
+                strip.setPixelColor(i, strip.Color(0, 50, 0));
+              }
+              strip.show();
+            }
+            else if(header.indexOf("GET /green") >= 0){
+              for(int i = 0; i < SIZE; i++){
+                strip.setPixelColor(i, strip.Color(50, 0, 0));
+              }
+              strip.show();
+            }
+            else if(header.indexOf("GET /purple") >= 0){
+              for(int i = 0; i < SIZE; i++){
+                strip.setPixelColor(i, strip.Color(0, 30, 30));
+              }
+              strip.show();
+            }
+            else if(header.indexOf("GET /yellow") >= 0){
+              for(int i = 0; i < SIZE; i++){
+                strip.setPixelColor(i, strip.Color(30, 30, 0));
+              }
+              strip.show();
+            }
+            else if(header.indexOf("GET /cyan") >= 0){
+              for(int i = 0; i < SIZE; i++){
+                strip.setPixelColor(i, strip.Color(30, 0, 30));
+              }
+              strip.show();
+            }
 
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name = \"viewport\" content = \"width = device-width, initial-scale = 1\">");
@@ -129,7 +165,7 @@ void loop() {
                 client.println("<p>value error!</p>");
               }
               client.println("<p><a href = \"off\"><button class = \"button button2\">change off?</button></a></p>");
-              client.println("<div class=\"container\"><div class=\"slider-group\"><div class=\"value-display\">currentvalue:<span id=\"currentValue\">50</span></div><input type=\"range\" id=\"slider\" min=\"0\" max=\"100\" value=\"50\" oninput=\"updateValue()\"><div><a href=\"brightness=50\" id = \"sendLink\" class = \"send-link\">send data</a></div></div>");
+              client.println("<div class=\"container\"><div class=\"slider-group\"><div class=\"value-display\">brightness:<span id=\"currentValue\">50</span></div><input type=\"range\" id=\"slider\" min=\"0\" max=\"100\" value=\"50\" oninput=\"updateValue()\"><div><a href=\"brightness=50\" id = \"sendLink\" class = \"send-link\">send data</a></div></div>");
             }
 
             client.println("<script>function updateValue() { const slider = document.getElementById('slider'); const value = slider.value; const link = document.getElementById('sendLink'); const display = document.getElementById('currentValue'); display.textContent = value; link.href = `brightness=${value}`; }</script>");
